@@ -1,0 +1,38 @@
+uuid: d08370cd-db73-4273-b5c1-aed17ebba436
+langcode: en-gb
+status: true
+dependencies:
+  config:
+    - field.field.node.information_practice.field_class
+    - field.field.node.information_practice.field_subject
+    - node.type.information_practice
+  module:
+    - file
+    - options
+    - user
+id: node.information_practice.default
+targetEntityType: node
+bundle: information_practice
+mode: default
+content:
+  field_class:
+    type: list_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  field_subject:
+    type: file_url_plain
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 103
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  langcode: true

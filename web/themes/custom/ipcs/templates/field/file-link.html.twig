@@ -1,0 +1,18 @@
+{#
+/**
+ * @file
+ * Theme override for a link to a file.
+ *
+ * Available variables:
+ * - attributes: The HTML attributes for the containing element.
+ * - link: A link to the file.
+ * - file_size: The size of the file.
+ *
+ * @see template_preprocess_file_link()
+ */
+#}
+
+<a href="{{ link['#url'] }}" target='_blank'>
+  <img  alt="Download PDF" class='download-icon' src="themes/custom/ipcs/assets/icons/pdf.svg">
+  <span{{ attributes }}>{{ link['#title'] }}</span>
+</a>

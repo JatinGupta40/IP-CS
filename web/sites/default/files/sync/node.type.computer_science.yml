@@ -1,0 +1,18 @@
+uuid: a07b5f13-18fd-46ff-a16a-0a38d06e3628
+langcode: en-gb
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+name: 'Computer Science'
+type: computer_science
+description: null
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: true

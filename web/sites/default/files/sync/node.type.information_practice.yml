@@ -1,0 +1,19 @@
+uuid: e8e3a4b8-dd60-4754-98d9-dcdc21adbe9c
+langcode: en-gb
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - dropdown-menu
+      - main
+    parent: 'main:'
+name: 'Information Practice'
+type: information_practice
+description: null
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: true

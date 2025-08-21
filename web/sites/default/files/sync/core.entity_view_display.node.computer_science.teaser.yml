@@ -1,0 +1,25 @@
+uuid: a41a2b02-dfb0-40a3-9bcf-6775e0e76ec4
+langcode: en-gb
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.computer_science.field_class
+    - field.field.node.computer_science.field_subject
+    - node.type.computer_science
+  module:
+    - user
+id: node.computer_science.teaser
+targetEntityType: node
+bundle: computer_science
+mode: teaser
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_class: true
+  field_subject: true
+  langcode: true

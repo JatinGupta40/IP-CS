@@ -1,0 +1,24 @@
+name: IPCS
+type: theme
+description: 'IPCS'
+core_version_requirement: ^9.4 || ^10 || ^11
+preprocess: true
+'base theme': arsha
+
+libraries:
+  - ipcs/global-styling
+
+regions:
+  header: Header
+  site_branding: 'Navigation branding region'
+  nav_main: 'Main navigation region'
+  nav_contact: 'Contact navigation region'
+  breadcrumb: Breadcrumbs
+  content: 'Main content'
+  sidebar_first: 'Sidebar first'
+  sidebar_second: 'Sidebar second'
+  footer_top: Footer Top
+  footer1: Footer1
+  footer2: Footer2
+  footer3: Footer3
+  footer4: Footer4

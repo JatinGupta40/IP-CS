@@ -1,0 +1,11 @@
+uuid: 870b8d11-3cd0-4bca-a403-a1fc116ed507
+langcode: en-gb
+status: true
+dependencies:
+  config:
+    - node.type.computer_science
+id: node.computer_science
+target_entity_type_id: node
+target_bundle: computer_science
+default_langcode: site_default
+language_alterable: false

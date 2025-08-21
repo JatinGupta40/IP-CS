@@ -1,0 +1,25 @@
+uuid: 484cc335-b43e-44aa-8374-c69111b9bd2c
+langcode: en-gb
+status: true
+dependencies:
+  config:
+    - system.menu.dropdown-menu
+  module:
+    - system
+  theme:
+    - arsha
+id: arsha_dropdownmenu
+theme: arsha
+region: nav_main
+weight: -7
+provider: null
+plugin: 'system_menu_block:dropdown-menu'
+settings:
+  id: 'system_menu_block:dropdown-menu'
+  label: 'Dropdown Menu'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility: {  }

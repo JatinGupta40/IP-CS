@@ -1,0 +1,35 @@
+uuid: 96381f23-e894-4e88-8b99-5048a0e5483a
+langcode: en-gb
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.syllabus.body
+    - field.field.node.syllabus.field_class
+    - field.field.node.syllabus.field_subject
+    - node.type.syllabus
+  module:
+    - text
+    - user
+id: node.syllabus.teaser
+targetEntityType: node
+bundle: syllabus
+mode: teaser
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_class: true
+  field_subject: true
+  langcode: true

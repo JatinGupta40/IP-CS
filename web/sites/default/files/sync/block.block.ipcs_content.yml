@@ -1,0 +1,22 @@
+uuid: 108a60dd-00dc-44b8-b425-5ce27877065e
+langcode: en-gb
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - ipcs
+_core:
+  default_config_hash: HMADaqp6zglwd6zWSfduB4BYGQXUpu-9ylhXgYck7Ms
+id: ipcs_content
+theme: ipcs
+region: content
+weight: -6
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  label_display: '0'
+  provider: system
+visibility: {  }

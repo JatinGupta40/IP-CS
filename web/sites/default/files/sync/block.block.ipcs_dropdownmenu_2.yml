@@ -1,0 +1,25 @@
+uuid: c07ee99b-cdc0-4188-9782-ff609dd9ee2a
+langcode: en-gb
+status: true
+dependencies:
+  config:
+    - system.menu.dropdown-menu
+  module:
+    - system
+  theme:
+    - ipcs
+id: ipcs_dropdownmenu_2
+theme: ipcs
+region: nav_main
+weight: -9
+provider: null
+plugin: 'system_menu_block:dropdown-menu'
+settings:
+  id: 'system_menu_block:dropdown-menu'
+  label: 'Dropdown Menu'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility: {  }

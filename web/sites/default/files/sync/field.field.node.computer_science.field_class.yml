@@ -1,0 +1,21 @@
+uuid: ce13e341-4858-457c-a4d1-eacd72c61ead
+langcode: en-gb
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_class
+    - node.type.computer_science
+  module:
+    - options
+id: node.computer_science.field_class
+field_name: field_class
+entity_type: node
+bundle: computer_science
+label: Class
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

@@ -1,0 +1,22 @@
+uuid: 4416bbb9-e528-46bf-ad1d-b09e9ef6dfb7
+langcode: en-gb
+status: true
+dependencies:
+  theme:
+    - ipcs
+_core:
+  default_config_hash: 0OZ49o9pU-tahHhs2piZ71TMyUBoP_oKoTFrpTboIoQ
+id: ipcs_primary_local_tasks
+theme: ipcs
+region: content
+weight: -8
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: 'Primary tabs'
+  label_display: '0'
+  provider: core
+  primary: true
+  secondary: false
+visibility: {  }

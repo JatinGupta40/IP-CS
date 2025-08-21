@@ -1,0 +1,23 @@
+uuid: e06541aa-1941-4811-9fb3-feff02b61e1c
+langcode: en-gb
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - ipcs
+id: ipcs_sitebranding
+theme: ipcs
+region: site_branding
+weight: -9
+provider: null
+plugin: system_branding_block
+settings:
+  id: system_branding_block
+  label: 'Site branding'
+  label_display: '0'
+  provider: system
+  use_site_logo: false
+  use_site_name: true
+  use_site_slogan: true
+visibility: {  }

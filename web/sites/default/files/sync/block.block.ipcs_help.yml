@@ -1,0 +1,22 @@
+uuid: e80c0aef-6456-4bb3-8f77-f384ad20a553
+langcode: en-gb
+status: false
+dependencies:
+  module:
+    - help
+  theme:
+    - ipcs
+_core:
+  default_config_hash: RBeSgo2BBsD4HyObjC74_Nfet9BxN72RyrLLUyHrRDQ
+id: ipcs_help
+theme: ipcs
+region: header
+weight: -4
+provider: null
+plugin: help_block
+settings:
+  id: help_block
+  label: Help
+  label_display: '0'
+  provider: help
+visibility: {  }

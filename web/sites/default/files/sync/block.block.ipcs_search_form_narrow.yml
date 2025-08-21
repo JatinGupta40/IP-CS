@@ -1,0 +1,23 @@
+uuid: cdfdd63e-2122-46d7-bfbb-9835504a9ace
+langcode: en-gb
+status: false
+dependencies:
+  module:
+    - search
+  theme:
+    - ipcs
+_core:
+  default_config_hash: gHDneYqBcnZeB2znVik-zX4UmGZXXPHjrYnkW5NTqFA
+id: ipcs_search_form_narrow
+theme: ipcs
+region: header
+weight: -6
+provider: null
+plugin: search_form_block
+settings:
+  id: search_form_block
+  label: 'Search form (narrow)'
+  label_display: '0'
+  provider: search
+  page_id: ''
+visibility: {  }

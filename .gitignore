@@ -1,0 +1,4 @@
+/web/themes/contrib/*
+/web/modules/contrib
+/node_modules
+/vendor

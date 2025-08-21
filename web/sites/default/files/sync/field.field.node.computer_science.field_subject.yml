@@ -1,0 +1,27 @@
+uuid: 63288295-4adb-45cb-bdd2-381f0816731b
+langcode: en-gb
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_subject
+    - node.type.computer_science
+  module:
+    - file
+id: node.computer_science.field_subject
+field_name: field_subject
+entity_type: node
+bundle: computer_science
+label: Chapter
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:file'
+  handler_settings: {  }
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_extensions: 'txt pdf docx'
+  max_filesize: ''
+  description_field: false
+field_type: file

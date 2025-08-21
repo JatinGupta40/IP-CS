@@ -1,0 +1,45 @@
+@import url("style.css");
+#block-ipcs-page-title {
+  padding: 1rem 0;
+  text-decoration: underline;
+}
+#block-ipcs-page-title h1 {
+  font-weight: 600;
+  font-size: 2rem;
+}
+
+.resource-table-wrapper .bef-exposed-form {
+  width: 30%;
+  padding-bottom: 5vh;
+}
+.resource-table-wrapper table {
+  border-collapse: collapse;
+  width: 100%;
+}
+.resource-table-wrapper table caption {
+  display: none;
+}
+.resource-table-wrapper table thead th, .resource-table-wrapper table tbody th {
+  background-color: var(--table-header-bg);
+}
+.resource-table-wrapper table thead tr th,
+.resource-table-wrapper table thead tr td, .resource-table-wrapper table tbody tr th,
+.resource-table-wrapper table tbody tr td {
+  border: 1px solid var(--table-border-color);
+  padding: 0.5rem 1rem;
+  text-align: left;
+}
+.resource-table-wrapper table thead tr:hover, .resource-table-wrapper table tbody tr:hover {
+  background-color: var(--table-header-bg);
+}
+.resource-table-wrapper table thead td.views-field-field-subject img.download-icon, .resource-table-wrapper table tbody td.views-field-field-subject img.download-icon {
+  height: auto;
+  width: 3.125rem;
+  margin-right: 0.625rem;
+}
+.resource-table-wrapper table thead td.views-field-field-subject span.file, .resource-table-wrapper table tbody td.views-field-field-subject span.file {
+  vertical-align: middle;
+}
+.resource-table-wrapper table thead th:last-child, .resource-table-wrapper table tbody th:last-child {
+  width: 35%;
+}

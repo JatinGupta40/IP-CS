@@ -1,0 +1,58 @@
+uuid: 357bdab4-30da-46d7-9db0-6a21cf3ef21b
+langcode: en-gb
+status: true
+dependencies:
+  config:
+    - field.field.node.syllabus.body
+    - field.field.node.syllabus.field_class
+    - field.field.node.syllabus.field_subject
+    - node.type.syllabus
+  module:
+    - file
+    - path
+id: node.syllabus.default
+targetEntityType: node
+bundle: syllabus
+mode: default
+content:
+  field_class:
+    type: options_select
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_subject:
+    type: file_generic
+    weight: 4
+    region: content
+    settings:
+      progress_indicator: throbber
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  promote:
+    type: boolean_checkbox
+    weight: 1
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  body: true
+  created: true
+  langcode: true
+  status: true
+  sticky: true
+  uid: true

@@ -1,0 +1,24 @@
+uuid: 652efc59-f235-4bbd-b655-0d7bbec1654c
+langcode: en-gb
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.syllabus
+  module:
+    - text
+id: node.syllabus.body
+field_name: body
+entity_type: node
+bundle: syllabus
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: false
+  allowed_formats: {  }
+field_type: text_with_summary

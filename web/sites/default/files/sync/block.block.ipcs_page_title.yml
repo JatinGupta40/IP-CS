@@ -1,0 +1,20 @@
+uuid: 1909cbe6-1308-4f85-a50d-c2ccb30979cf
+langcode: en-gb
+status: true
+dependencies:
+  theme:
+    - ipcs
+_core:
+  default_config_hash: U3BWz1JKzy0CR0CjTZZxMsjl-q3VFXSdl9-5qPW717E
+id: ipcs_page_title
+theme: ipcs
+region: content
+weight: -7
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Page title'
+  label_display: '0'
+  provider: core
+visibility: {  }

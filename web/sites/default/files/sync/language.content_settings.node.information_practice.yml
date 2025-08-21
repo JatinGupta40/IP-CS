@@ -1,0 +1,11 @@
+uuid: 83c2db30-8e21-4d6a-9d95-fa39f21ac2ce
+langcode: en-gb
+status: true
+dependencies:
+  config:
+    - node.type.information_practice
+id: node.information_practice
+target_entity_type_id: node
+target_bundle: information_practice
+default_langcode: site_default
+language_alterable: false

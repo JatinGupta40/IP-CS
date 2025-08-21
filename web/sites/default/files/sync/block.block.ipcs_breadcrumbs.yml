@@ -1,0 +1,22 @@
+uuid: e46a2504-a99f-4aae-9754-0d2c7106d865
+langcode: en-gb
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - ipcs
+_core:
+  default_config_hash: K3sTj29qOhegg_81HPDnK_b2_oUd8fKtZ0_E5PDB7JU
+id: ipcs_breadcrumbs
+theme: ipcs
+region: breadcrumb
+weight: -8
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: Breadcrumbs
+  label_display: '0'
+  provider: system
+visibility: {  }

@@ -1,0 +1,60 @@
+@import url('style.css');
+
+#block-ipcs-page-title {
+  padding: 1rem 0;
+  text-decoration: underline;
+
+  h1 {
+    font-weight: 600;
+    font-size: 2rem;
+  }
+}
+
+.resource-table-wrapper {
+  .bef-exposed-form {
+    width: 30%;
+    padding-bottom: 5vh;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+
+    caption {
+      display: none;
+    }
+
+    thead,tbody {
+      th {
+        background-color: var(--table-header-bg);
+      }
+
+      tr th,
+      tr td {
+        border: 1px solid var(--table-border-color);
+        padding: 0.5rem 1rem;
+        text-align: left;
+      }
+
+      tr:hover {
+        background-color: var(--table-header-bg);
+      }
+
+      td.views-field-field-subject {
+        img.download-icon {
+          height: auto;
+          width: 3.125rem;
+          margin-right: 0.625rem;
+        }
+
+        span.file {
+          vertical-align: middle;
+        }
+      }
+
+      th:last-child {
+        width: 35%;
+      }
+    }
+  }
+}

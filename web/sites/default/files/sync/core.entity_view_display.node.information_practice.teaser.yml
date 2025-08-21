@@ -1,0 +1,25 @@
+uuid: 9003f949-90b2-4d85-8dfe-9ee925b43567
+langcode: en-gb
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.information_practice.field_class
+    - field.field.node.information_practice.field_subject
+    - node.type.information_practice
+  module:
+    - user
+id: node.information_practice.teaser
+targetEntityType: node
+bundle: information_practice
+mode: teaser
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_class: true
+  field_subject: true
+  langcode: true

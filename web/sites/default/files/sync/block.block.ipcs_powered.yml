@@ -1,0 +1,22 @@
+uuid: d28b86e2-abfb-4bcc-b205-cc33eb1e8a8e
+langcode: en-gb
+status: false
+dependencies:
+  module:
+    - system
+  theme:
+    - ipcs
+_core:
+  default_config_hash: ulIB7WuVL-bDrY9gD1O_NIqsHDsETYkvdQmkBI0BM9A
+id: ipcs_powered
+theme: ipcs
+region: header
+weight: -5
+provider: null
+plugin: system_powered_by_block
+settings:
+  id: system_powered_by_block
+  label: 'Powered by Drupal'
+  label_display: '0'
+  provider: system
+visibility: {  }

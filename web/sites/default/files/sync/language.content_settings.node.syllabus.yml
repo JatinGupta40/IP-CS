@@ -1,0 +1,11 @@
+uuid: 27d489cf-37ae-43e4-8ed2-7578883cde86
+langcode: en-gb
+status: true
+dependencies:
+  config:
+    - node.type.syllabus
+id: node.syllabus
+target_entity_type_id: node
+target_bundle: syllabus
+default_langcode: site_default
+language_alterable: false

@@ -1,0 +1,27 @@
+uuid: 0f8808d1-f085-4d5d-a82f-838995013ecd
+langcode: en-gb
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_subject
+    - node.type.syllabus
+  module:
+    - file
+id: node.syllabus.field_subject
+field_name: field_subject
+entity_type: node
+bundle: syllabus
+label: Subject
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:file'
+  handler_settings: {  }
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_extensions: 'txt pdf docx'
+  max_filesize: ''
+  description_field: false
+field_type: file

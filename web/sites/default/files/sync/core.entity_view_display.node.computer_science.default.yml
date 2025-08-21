@@ -1,0 +1,38 @@
+uuid: 931ce65c-d670-42c1-8dc1-4a76b0875f1e
+langcode: en-gb
+status: true
+dependencies:
+  config:
+    - field.field.node.computer_science.field_class
+    - field.field.node.computer_science.field_subject
+    - node.type.computer_science
+  module:
+    - file
+    - options
+    - user
+id: node.computer_science.default
+targetEntityType: node
+bundle: computer_science
+mode: default
+content:
+  field_class:
+    type: list_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  field_subject:
+    type: file_url_plain
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 103
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  langcode: true

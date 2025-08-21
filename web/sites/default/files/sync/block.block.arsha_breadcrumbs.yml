@@ -1,0 +1,22 @@
+uuid: d803569c-72dc-4cf9-999d-03f54faadbbb
+langcode: en-gb
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - arsha
+_core:
+  default_config_hash: K3sTj29qOhegg_81HPDnK_b2_oUd8fKtZ0_E5PDB7JU
+id: arsha_breadcrumbs
+theme: arsha
+region: breadcrumb
+weight: -8
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: Breadcrumbs
+  label_display: '0'
+  provider: system
+visibility: {  }
