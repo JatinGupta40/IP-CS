@@ -2,3 +2,4 @@
 /web/modules/contrib
 /node_modules
 /vendor
+/web/core/lib/Drupal
