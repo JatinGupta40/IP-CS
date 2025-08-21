@@ -7,6 +7,7 @@ global-styling:
         external: true
       assets/css/global.css: {}
       assets/css/table.css: {}
+      assets/css/resource-views.css: {}
       # assets/css/aos.css: {}
       # assets/css/bootstrap.min.css: {}
       # assets/css/boxicons.css: {}

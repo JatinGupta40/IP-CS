@@ -1,0 +1,60 @@
+.resource-table-wrapper {
+  padding: 1.25rem;
+  border-radius: 1rem;
+  border: 1px solid #e0e0e0;
+  margin-bottom: 1.25rem;
+  background: linear-gradient(135deg, #f9f9f9, #ffffff);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+.resource-table-wrapper form.views-exposed-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 0 0 16px 0;
+  align-items: center;
+}
+.resource-table-wrapper form.views-exposed-form .form-item-class {
+  flex: 1;
+  min-width: 200px;
+}
+.resource-table-wrapper form.views-exposed-form .form-item-class .form-select {
+  padding: 0.625rem 1rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+}
+.resource-table-wrapper form.views-exposed-form .form-item-class .form-select:hover {
+  border-color: #999;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+}
+.resource-table-wrapper form.views-exposed-form .form-actions input {
+  background: linear-gradient(135deg, #2563eb, #1e40af);
+  padding: 0.625rem 1.25rem;
+  color: #fff;
+  border: none;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+.resource-table-wrapper form.views-exposed-form .form-actions input:hover {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4);
+}
+.resource-table-wrapper form.views-exposed-form .form-actions input:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+.resource-table-wrapper .no-results-message {
+  text-align: center;
+  padding: 1.875rem;
+  background: #f9f9f9;
+  border: 1px dashed #ccc;
+  border-radius: 8px;
+  font-family: Arial, sans-serif;
+}
+.resource-table-wrapper .no-results-message h3 {
+  color: #e63946;
+  margin-bottom: 0.625rem;
+}

@@ -1,6 +1,6 @@
 uuid: 1909cbe6-1308-4f85-a50d-c2ccb30979cf
 langcode: en-gb
-status: true
+status: false
 dependencies:
   theme:
     - ipcs
@@ -9,7 +9,7 @@ _core:
 id: ipcs_page_title
 theme: ipcs
 region: content
-weight: -7
+weight: -8
 provider: null
 plugin: page_title_block
 settings:

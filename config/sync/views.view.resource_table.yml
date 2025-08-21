@@ -160,7 +160,7 @@ display:
           text_input_required_format: basic_html
           bef:
             general:
-              autosubmit: true
+              autosubmit: false
               autosubmit_exclude_textfield: false
               autosubmit_textfield_delay: 500
               autosubmit_textfield_minimum_length: 3
@@ -189,7 +189,12 @@ display:
       cache:
         type: tag
         options: {  }
-      empty: {  }
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          plugin_id: text
       sorts:
         created:
           id: created
@@ -593,6 +598,20 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text
+          empty: true
+          content:
+            value: "<div class=\"no-results-message\">\r\n  <h3>OOPS! No result found.</h3>\r\n  <p>Notes will be available soon.</p>\r\n</div>"
+            format: full_html
+          tokenize: false
       filters:
         status:
           id: status
@@ -625,7 +644,7 @@ display:
             operator: field_class_value_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: field_class_value
+            identifier: class
             required: false
             remember: false
             multiple: false
@@ -707,10 +726,13 @@ display:
         groups:
           1: AND
       defaults:
+        empty: false
         title: false
+        use_ajax: false
         fields: false
         filters: false
         filter_groups: false
+      use_ajax: false
       display_description: ''
       display_extenders: {  }
       path: computer-science
@@ -973,6 +995,20 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text
+          empty: true
+          content:
+            value: "<div class=\"no-results-message\">\r\n  <h3>OOPS! No result found.</h3>\r\n  <p>Notes will be available soon.</p>\r\n</div>"
+            format: full_html
+          tokenize: false
       filters:
         status:
           id: status
@@ -1005,7 +1041,7 @@ display:
             operator: field_class_value_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: field_class_value
+            identifier: class
             required: false
             remember: false
             multiple: false
@@ -1087,10 +1123,13 @@ display:
         groups:
           1: AND
       defaults:
+        empty: false
         title: false
+        use_ajax: false
         fields: false
         filters: false
         filter_groups: false
+      use_ajax: false
       display_description: ''
       display_extenders: {  }
       path: information-practice
@@ -1352,6 +1391,20 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text
+          empty: true
+          content:
+            value: "<div class=\"no-results-message\">\r\n  <h3>OOPS! No result found.</h3>\r\n  <p>Syllabus will be available soon.</p>\r\n</div>"
+            format: full_html
+          tokenize: false
       filters:
         status:
           id: status
@@ -1384,7 +1437,7 @@ display:
             operator: field_class_value_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: field_class_value
+            identifier: class
             required: false
             remember: false
             multiple: false
@@ -1466,9 +1519,12 @@ display:
         groups:
           1: AND
       defaults:
+        empty: false
+        use_ajax: false
         fields: false
         filters: false
         filter_groups: false
+      use_ajax: false
       display_description: ''
       display_extenders: {  }
       path: syllabus

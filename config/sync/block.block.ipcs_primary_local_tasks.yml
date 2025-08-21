@@ -1,6 +1,6 @@
 uuid: 4416bbb9-e528-46bf-ad1d-b09e9ef6dfb7
 langcode: en-gb
-status: true
+status: false
 dependencies:
   theme:
     - ipcs
@@ -9,7 +9,7 @@ _core:
 id: ipcs_primary_local_tasks
 theme: ipcs
 region: content
-weight: -8
+weight: -7
 provider: null
 plugin: local_tasks_block
 settings:

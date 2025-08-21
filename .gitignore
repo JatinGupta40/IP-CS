@@ -2,4 +2,6 @@
 /web/modules/contrib
 /node_modules
 /vendor
-/web/core/lib/Drupal
+/web/core/sites/files/*
+/web/files/
+/web/sites/default/services.yml
