@@ -1,0 +1,78 @@
+diff --git a/core/includes/batch.inc b/core/includes/batch.inc
+index 3c80ee1d1db8dd1613949b63b932c1ec2b597d05..080b2867bc51f578141fcd78a8f0e4004f95508a 100644
+--- a/core/includes/batch.inc
++++ b/core/includes/batch.inc
+@@ -22,6 +22,7 @@
+ use Symfony\Component\HttpFoundation\JsonResponse;
+ use Symfony\Component\HttpFoundation\Request;
+ use Symfony\Component\HttpFoundation\RedirectResponse;
++use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+ 
+ /**
+  * Renders the batch processing page based on the current state of the batch.
+@@ -42,8 +43,8 @@ function _batch_page(Request $request) {
+   if (!$batch) {
+     $batch = \Drupal::service('batch.storage')->load($request_id);
+     if (!$batch) {
+-      \Drupal::messenger()->addError(t('No active batch.'));
+-      return new RedirectResponse(Url::fromRoute('<front>', [], ['absolute' => TRUE])->toString());
++      \Drupal::messenger()->addError(t('No batch with ID @batch exists.', ['@batch' => $request_id]));
++      throw new NotFoundHttpException(sprintf('No batch with ID %s exists.', $request_id));
+     }
+   }
+ 
+diff --git a/core/modules/system/tests/src/Functional/Batch/BatchNotFoundTest.php b/core/modules/system/tests/src/Functional/Batch/BatchNotFoundTest.php
+new file mode 100644
+index 0000000000000000000000000000000000000000..97abd54759f3f80256b8e363a04a408f1742e9b3
+--- /dev/null
++++ b/core/modules/system/tests/src/Functional/Batch/BatchNotFoundTest.php
+@@ -0,0 +1,49 @@
++<?php
++
++declare(strict_types=1);
++
++namespace Drupal\Tests\system\Functional\Batch;
++
++use Drupal\Core\Batch\BatchStorageInterface;
++use Drupal\Tests\BrowserTestBase;
++
++/**
++ * Tests if a page not found error is returned when a batch ID does not exist.
++ *
++ * @group Batch
++ */
++class BatchNotFoundTest extends BrowserTestBase {
++
++  /**
++   * {@inheritdoc}
++   */
++  protected static $modules = ['batch_test'];
++
++  /**
++   * {@inheritdoc}
++   */
++  protected $defaultTheme = 'stark';
++
++  /**
++   * Tests for page not found error if batch ID does not exist.
++   */
++  public function testBatchNotFound(): void {
++
++    $edit = ['batch' => 'batch_0'];
++    $this->drupalGet('batch-test');
++    $this->submitForm($edit, 'Submit');
++    $this->assertSession()->statusCodeEquals(200);
++
++    $batch_id = \Drupal::service(BatchStorageInterface::class)->getId();
++
++    $this->drupalGet('batch', [
++      'query' => [
++        'op' => 'start',
++        'id' => $batch_id,
++      ],
++    ]);
++
++    $this->assertSession()->statusCodeEquals(404);
++  }
++
++}

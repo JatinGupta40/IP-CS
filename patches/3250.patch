@@ -1,0 +1,399 @@
+From 6cd3e8bd1ec36215a4233cf5572f8d863072c992 Mon Sep 17 00:00:00 2001
+From: Bhanu951 <Bhanu951@3607219.no-reply.drupal.org>
+Date: Mon, 16 Jan 2023 15:10:09 +0530
+Subject: [PATCH 01/11] Issue #1986330 by subhojit777, marcelodornelas,
+ ravi.shankar, immaculatexavier, wheatpenny, nikunjkotecha,
+ shashikant_chauhan, vacho, smagdits, kasperg, aron.beal, andriansyah,
+ rajeevk, Suresh Prabhu Parkala, mangy.fox, cebasqueira, richardcanoe,
+ stefank, quietone, YesCT, AkshayKalose, DrDam, DevElCuy, John Cook, alexpott,
+ xjm, moymilo, dawehner, tstoeckler, webchick, AkashKumar07, bhanu951: When
+ Batch ID doesn't exist, Drupal should emit a 404
+
+---
+ core/includes/batch.inc                       |  5 ++-
+ .../Core/Batch/BatchNotFoundTest.php          | 44 +++++++++++++++++++
+ 2 files changed, 47 insertions(+), 2 deletions(-)
+ create mode 100644 core/tests/Drupal/FunctionalTests/Core/Batch/BatchNotFoundTest.php
+
+diff --git a/core/includes/batch.inc b/core/includes/batch.inc
+index 3c80ee1d1db8..273f11c92f84 100644
+--- a/core/includes/batch.inc
++++ b/core/includes/batch.inc
+@@ -22,6 +22,7 @@
+ use Symfony\Component\HttpFoundation\JsonResponse;
+ use Symfony\Component\HttpFoundation\Request;
+ use Symfony\Component\HttpFoundation\RedirectResponse;
++use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+ 
+ /**
+  * Renders the batch processing page based on the current state of the batch.
+@@ -42,8 +43,8 @@ function _batch_page(Request $request) {
+   if (!$batch) {
+     $batch = \Drupal::service('batch.storage')->load($request_id);
+     if (!$batch) {
+-      \Drupal::messenger()->addError(t('No active batch.'));
+-      return new RedirectResponse(Url::fromRoute('<front>', [], ['absolute' => TRUE])->toString());
++      \Drupal::messenger()->addError(t('No batch with ID (@batch) exists.', ['@batch' => $request_id]));
++      throw new NotFoundHttpException(sprintf('No batch with ID %s exists.', $request_id));
+     }
+   }
+ 
+diff --git a/core/tests/Drupal/FunctionalTests/Core/Batch/BatchNotFoundTest.php b/core/tests/Drupal/FunctionalTests/Core/Batch/BatchNotFoundTest.php
+new file mode 100644
+index 000000000000..d15463e864d3
+--- /dev/null
++++ b/core/tests/Drupal/FunctionalTests/Core/Batch/BatchNotFoundTest.php
+@@ -0,0 +1,44 @@
++<?php
++
++namespace Drupal\FunctionalTests\Core\Batch;
++
++use Drupal\Tests\BrowserTestBase;
++
++/**
++ * Tests if Drupal returns page not found error when batch ID does not exist.
++ *
++ * @group Batch
++ */
++class BatchNotFoundTest extends BrowserTestBase {
++
++  /**
++   * {@inheritdoc}
++   */
++  protected $defaultTheme = 'stark';
++
++  /**
++   * {@inheritdoc}
++   */
++  protected static $modules = ['batch_test'];
++
++  /**
++   * Tests for page not found error if batch ID does not exist.
++   */
++  public function testBatchNotFound() {
++    $edit = ['batch' => 'batch_0'];
++    $this->drupalGet('batch-test');
++    $this->submitForm($edit, 'Submit');
++
++    $batch_id = $this->container->get('database')->nextId();
++
++    $this->drupalGet('batch', [
++      'query' => [
++        'op' => 'start',
++        'id' => $batch_id,
++      ],
++    ]);
++
++    $this->assertSession()->statusCodeEquals(404);
++  }
++
++}
+-- 
+GitLab
+
+
+From 9da08bf84e5a928b18f7c92e18535e7ee58e4c55 Mon Sep 17 00:00:00 2001
+From: Bhanu951 <Bhanu951@3607219.no-reply.drupal.org>
+Date: Mon, 16 Jan 2023 15:17:23 +0530
+Subject: [PATCH 02/11] Message Updated.
+
+---
+ core/includes/batch.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/core/includes/batch.inc b/core/includes/batch.inc
+index 273f11c92f84..080b2867bc51 100644
+--- a/core/includes/batch.inc
++++ b/core/includes/batch.inc
+@@ -43,7 +43,7 @@ function _batch_page(Request $request) {
+   if (!$batch) {
+     $batch = \Drupal::service('batch.storage')->load($request_id);
+     if (!$batch) {
+-      \Drupal::messenger()->addError(t('No batch with ID (@batch) exists.', ['@batch' => $request_id]));
++      \Drupal::messenger()->addError(t('No batch with ID @batch exists.', ['@batch' => $request_id]));
+       throw new NotFoundHttpException(sprintf('No batch with ID %s exists.', $request_id));
+     }
+   }
+-- 
+GitLab
+
+
+From 1175ab9e3db033bdb6834722b512de8bbb3841ff Mon Sep 17 00:00:00 2001
+From: Bhanu D <50266-Bhanu951@users.noreply.drupalcode.org>
+Date: Fri, 29 Nov 2024 08:00:58 +0000
+Subject: [PATCH 03/11] Update BatchNotFoundTest.php
+
+---
+ .../Drupal/FunctionalTests/Core/Batch/BatchNotFoundTest.php    | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/core/tests/Drupal/FunctionalTests/Core/Batch/BatchNotFoundTest.php b/core/tests/Drupal/FunctionalTests/Core/Batch/BatchNotFoundTest.php
+index d15463e864d3..d892c55f5337 100644
+--- a/core/tests/Drupal/FunctionalTests/Core/Batch/BatchNotFoundTest.php
++++ b/core/tests/Drupal/FunctionalTests/Core/Batch/BatchNotFoundTest.php
+@@ -1,5 +1,8 @@
+ <?php
+ 
++declare(strict_types=1);
++
++
+ namespace Drupal\FunctionalTests\Core\Batch;
+ 
+ use Drupal\Tests\BrowserTestBase;
+-- 
+GitLab
+
+
+From 5cafd37e5e7b49f9f4f5859a116dba594fdc69c4 Mon Sep 17 00:00:00 2001
+From: Bhanu D <50266-Bhanu951@users.noreply.drupalcode.org>
+Date: Fri, 29 Nov 2024 08:01:27 +0000
+Subject: [PATCH 04/11] Update BatchNotFoundTest.php
+
+---
+ .../Drupal/FunctionalTests/Core/Batch/BatchNotFoundTest.php      | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/core/tests/Drupal/FunctionalTests/Core/Batch/BatchNotFoundTest.php b/core/tests/Drupal/FunctionalTests/Core/Batch/BatchNotFoundTest.php
+index d892c55f5337..5056d17658c9 100644
+--- a/core/tests/Drupal/FunctionalTests/Core/Batch/BatchNotFoundTest.php
++++ b/core/tests/Drupal/FunctionalTests/Core/Batch/BatchNotFoundTest.php
+@@ -2,7 +2,6 @@
+ 
+ declare(strict_types=1);
+ 
+-
+ namespace Drupal\FunctionalTests\Core\Batch;
+ 
+ use Drupal\Tests\BrowserTestBase;
+-- 
+GitLab
+
+
+From cde2f4add064e118caa61158099023f17746fd94 Mon Sep 17 00:00:00 2001
+From: Bhanu D <50266-Bhanu951@users.noreply.drupalcode.org>
+Date: Fri, 29 Nov 2024 08:13:22 +0000
+Subject: [PATCH 05/11] Update BatchNotFoundTest.php
+
+---
+ .../Drupal/FunctionalTests/Core/Batch/BatchNotFoundTest.php     | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/core/tests/Drupal/FunctionalTests/Core/Batch/BatchNotFoundTest.php b/core/tests/Drupal/FunctionalTests/Core/Batch/BatchNotFoundTest.php
+index 5056d17658c9..5107a0390ff9 100644
+--- a/core/tests/Drupal/FunctionalTests/Core/Batch/BatchNotFoundTest.php
++++ b/core/tests/Drupal/FunctionalTests/Core/Batch/BatchNotFoundTest.php
+@@ -26,7 +26,7 @@ class BatchNotFoundTest extends BrowserTestBase {
+   /**
+    * Tests for page not found error if batch ID does not exist.
+    */
+-  public function testBatchNotFound() {
++  public function testBatchNotFound(): void {
+     $edit = ['batch' => 'batch_0'];
+     $this->drupalGet('batch-test');
+     $this->submitForm($edit, 'Submit');
+-- 
+GitLab
+
+
+From 6c3cea39ed50a9016bfa9e03ea1027b7f877cb24 Mon Sep 17 00:00:00 2001
+From: Bhanu <50266-Bhanu951@users.noreply.drupalcode.org>
+Date: Mon, 30 Dec 2024 13:41:18 +0530
+Subject: [PATCH 06/11] Issue #1986330 by subhojit777, bhanu951,
+ marcelodornelas, ravi.shankar, immaculatexavier, wheatpenny, nikunjkotecha,
+ shashikant_chauhan, vacho, smagdits, kasperg, aron.beal, andriansyah, suresh
+ prabhu parkala, rajeevk, mangy.fox, cebasqueira, richardcanoe, stefank,
+ quietone, yesct, drdam, AkshayKalose, DevElCuy, john cook, xjm, moymilo,
+ alexpott, dawehner, tstoeckler, webchick, akashkumar07: When Batch ID doesn't
+ exist, Drupal should emit a 404
+
+---
+ .../system/tests/src/Functional}/Batch/BatchNotFoundTest.php | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+ rename core/{tests/Drupal/FunctionalTests/Core => modules/system/tests/src/Functional}/Batch/BatchNotFoundTest.php (81%)
+
+diff --git a/core/tests/Drupal/FunctionalTests/Core/Batch/BatchNotFoundTest.php b/core/modules/system/tests/src/Functional/Batch/BatchNotFoundTest.php
+similarity index 81%
+rename from core/tests/Drupal/FunctionalTests/Core/Batch/BatchNotFoundTest.php
+rename to core/modules/system/tests/src/Functional/Batch/BatchNotFoundTest.php
+index 5107a0390ff9..00fef220a241 100644
+--- a/core/tests/Drupal/FunctionalTests/Core/Batch/BatchNotFoundTest.php
++++ b/core/modules/system/tests/src/Functional/Batch/BatchNotFoundTest.php
+@@ -2,7 +2,7 @@
+ 
+ declare(strict_types=1);
+ 
+-namespace Drupal\FunctionalTests\Core\Batch;
++namespace Drupal\Tests\system\Functional\Batch;
+ 
+ use Drupal\Tests\BrowserTestBase;
+ 
+@@ -31,7 +31,8 @@ public function testBatchNotFound(): void {
+     $this->drupalGet('batch-test');
+     $this->submitForm($edit, 'Submit');
+ 
+-    $batch_id = $this->container->get('database')->nextId();
++    // $batch_id = $this->container->get('database')->nextId();
++    $batch_id = $this->container->get('batch.storage')->getId();
+ 
+     $this->drupalGet('batch', [
+       'query' => [
+-- 
+GitLab
+
+
+From 47cf4b8876511491aedf172277121a5f33933a2c Mon Sep 17 00:00:00 2001
+From: Bhanu <50266-Bhanu951@users.noreply.drupalcode.org>
+Date: Mon, 30 Dec 2024 14:29:12 +0530
+Subject: [PATCH 07/11] Issue #1986330 by subhojit777, bhanu951,
+ marcelodornelas, ravi.shankar, immaculatexavier, wheatpenny, nikunjkotecha,
+ shashikant_chauhan, vacho, smagdits, kasperg, aron.beal, andriansyah, suresh
+ prabhu parkala, rajeevk, mangy.fox, cebasqueira, richardcanoe, stefank,
+ quietone, yesct, drdam, AkshayKalose, DevElCuy, john cook, xjm, moymilo,
+ alexpott, dawehner, tstoeckler, webchick, akashkumar07: When Batch ID doesn't
+ exist, Drupal should emit a 404
+
+---
+ .../system/tests/src/Functional/Batch/BatchNotFoundTest.php      | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/core/modules/system/tests/src/Functional/Batch/BatchNotFoundTest.php b/core/modules/system/tests/src/Functional/Batch/BatchNotFoundTest.php
+index 00fef220a241..e12047eb391e 100644
+--- a/core/modules/system/tests/src/Functional/Batch/BatchNotFoundTest.php
++++ b/core/modules/system/tests/src/Functional/Batch/BatchNotFoundTest.php
+@@ -31,7 +31,6 @@ public function testBatchNotFound(): void {
+     $this->drupalGet('batch-test');
+     $this->submitForm($edit, 'Submit');
+ 
+-    // $batch_id = $this->container->get('database')->nextId();
+     $batch_id = $this->container->get('batch.storage')->getId();
+ 
+     $this->drupalGet('batch', [
+-- 
+GitLab
+
+
+From 911f32fffe0f499a6b1201b65235df23bf4bd055 Mon Sep 17 00:00:00 2001
+From: Bhanu D <50266-Bhanu951@users.noreply.drupalcode.org>
+Date: Mon, 30 Dec 2024 09:08:43 +0000
+Subject: [PATCH 08/11] Apply 1 suggestion(s) to 1 file(s)
+
+Co-authored-by: Bram Driesen <4761-BramDriesen@users.noreply.drupalcode.org>
+---
+ .../system/tests/src/Functional/Batch/BatchNotFoundTest.php     | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/core/modules/system/tests/src/Functional/Batch/BatchNotFoundTest.php b/core/modules/system/tests/src/Functional/Batch/BatchNotFoundTest.php
+index e12047eb391e..2b7a65d5c585 100644
+--- a/core/modules/system/tests/src/Functional/Batch/BatchNotFoundTest.php
++++ b/core/modules/system/tests/src/Functional/Batch/BatchNotFoundTest.php
+@@ -7,7 +7,7 @@
+ use Drupal\Tests\BrowserTestBase;
+ 
+ /**
+- * Tests if Drupal returns page not found error when batch ID does not exist.
++ * Tests if a page not found error is returned when a batch ID does not exist.
+  *
+  * @group Batch
+  */
+-- 
+GitLab
+
+
+From 4b5663bd253856990c4577c18ecd424dfe28ca3a Mon Sep 17 00:00:00 2001
+From: Bhanu D <50266-Bhanu951@users.noreply.drupalcode.org>
+Date: Tue, 31 Dec 2024 05:23:37 +0000
+Subject: [PATCH 09/11] Apply 1 suggestion(s) to 1 file(s)
+
+Co-authored-by: Benji Fisher <4949-benjifisher@users.noreply.drupalcode.org>
+---
+ .../system/tests/src/Functional/Batch/BatchNotFoundTest.php   | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/core/modules/system/tests/src/Functional/Batch/BatchNotFoundTest.php b/core/modules/system/tests/src/Functional/Batch/BatchNotFoundTest.php
+index 2b7a65d5c585..6e39b51ae35b 100644
+--- a/core/modules/system/tests/src/Functional/Batch/BatchNotFoundTest.php
++++ b/core/modules/system/tests/src/Functional/Batch/BatchNotFoundTest.php
+@@ -16,12 +16,12 @@ class BatchNotFoundTest extends BrowserTestBase {
+   /**
+    * {@inheritdoc}
+    */
+-  protected $defaultTheme = 'stark';
++  protected static $modules = ['batch_test'];
+ 
+   /**
+    * {@inheritdoc}
+    */
+-  protected static $modules = ['batch_test'];
++  protected $defaultTheme = 'stark';
+ 
+   /**
+    * Tests for page not found error if batch ID does not exist.
+-- 
+GitLab
+
+
+From ba9378e4c7e344b2b14fc964c5aff17ed744ab82 Mon Sep 17 00:00:00 2001
+From: Bhanu D <50266-Bhanu951@users.noreply.drupalcode.org>
+Date: Tue, 31 Dec 2024 05:27:39 +0000
+Subject: [PATCH 10/11] Update BatchNotFoundTest.php
+
+---
+ .../system/tests/src/Functional/Batch/BatchNotFoundTest.php  | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/core/modules/system/tests/src/Functional/Batch/BatchNotFoundTest.php b/core/modules/system/tests/src/Functional/Batch/BatchNotFoundTest.php
+index 6e39b51ae35b..d62b48cb79be 100644
+--- a/core/modules/system/tests/src/Functional/Batch/BatchNotFoundTest.php
++++ b/core/modules/system/tests/src/Functional/Batch/BatchNotFoundTest.php
+@@ -4,6 +4,7 @@
+ 
+ namespace Drupal\Tests\system\Functional\Batch;
+ 
++use Drupal\Core\Batch\BatchStorageInterface;
+ use Drupal\Tests\BrowserTestBase;
+ 
+ /**
+@@ -27,11 +28,13 @@ class BatchNotFoundTest extends BrowserTestBase {
+    * Tests for page not found error if batch ID does not exist.
+    */
+   public function testBatchNotFound(): void {
++    
+     $edit = ['batch' => 'batch_0'];
+     $this->drupalGet('batch-test');
+     $this->submitForm($edit, 'Submit');
++    $this->assertSession()->statusCodeEquals(200);
+ 
+-    $batch_id = $this->container->get('batch.storage')->getId();
++    $batch_id = \Drupal::service(BatchStorageInterface::class)->getId();
+ 
+     $this->drupalGet('batch', [
+       'query' => [
+-- 
+GitLab
+
+
+From 95ae0699c499e60c635c2b481d7ac4edf142f9d5 Mon Sep 17 00:00:00 2001
+From: Bhanu D <50266-Bhanu951@users.noreply.drupalcode.org>
+Date: Tue, 31 Dec 2024 05:30:22 +0000
+Subject: [PATCH 11/11] Update BatchNotFoundTest.php
+
+---
+ .../system/tests/src/Functional/Batch/BatchNotFoundTest.php     | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/core/modules/system/tests/src/Functional/Batch/BatchNotFoundTest.php b/core/modules/system/tests/src/Functional/Batch/BatchNotFoundTest.php
+index d62b48cb79be..97abd54759f3 100644
+--- a/core/modules/system/tests/src/Functional/Batch/BatchNotFoundTest.php
++++ b/core/modules/system/tests/src/Functional/Batch/BatchNotFoundTest.php
+@@ -28,7 +28,7 @@ class BatchNotFoundTest extends BrowserTestBase {
+    * Tests for page not found error if batch ID does not exist.
+    */
+   public function testBatchNotFound(): void {
+-    
++
+     $edit = ['batch' => 'batch_0'];
+     $this->drupalGet('batch-test');
+     $this->submitForm($edit, 'Submit');
+-- 
+GitLab
+
