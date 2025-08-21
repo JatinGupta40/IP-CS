@@ -45,7 +45,6 @@ function _batch_page(Request $request) {
     if (!$batch) {
       \Drupal::messenger()->addError(t('No batch with ID @batch exists.', ['@batch' => $request_id]));
       throw new NotFoundHttpException(sprintf('No batch with ID %s exists.', $request_id));
-      throw new NotFoundHttpException(format_string('Page controller for batch %id requested, but batch was not found.', array('%id' => $request_id)));
     }
   }
 
