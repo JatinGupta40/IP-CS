@@ -4,7 +4,10 @@ status: true
 dependencies:
   config:
     - node.type.article
+    - node.type.computer_science
+    - node.type.information_practice
     - node.type.page
+    - node.type.syllabus
     - taxonomy.vocabulary.tags
   module:
     - comment
@@ -12,6 +15,7 @@ dependencies:
     - file
     - node
     - path
+    - publishcontent
     - system
     - taxonomy
     - toolbar
@@ -29,19 +33,77 @@ permissions:
   - 'access toolbar'
   - 'administer url aliases'
   - 'create article content'
+  - 'create computer_science content'
+  - 'create information_practice content'
   - 'create page content'
+  - 'create syllabus content'
   - 'create terms in tags'
   - 'create url aliases'
+  - 'delete any computer_science content'
+  - 'delete any information_practice content'
+  - 'delete any syllabus content'
   - 'delete article revisions'
+  - 'delete computer_science revisions'
+  - 'delete information_practice revisions'
   - 'delete own article content'
+  - 'delete own computer_science content'
   - 'delete own files'
+  - 'delete own information_practice content'
   - 'delete own page content'
+  - 'delete own syllabus content'
   - 'delete page revisions'
+  - 'delete syllabus revisions'
+  - 'edit any computer_science content'
+  - 'edit any information_practice content'
+  - 'edit any syllabus content'
   - 'edit own article content'
   - 'edit own comments'
+  - 'edit own computer_science content'
+  - 'edit own information_practice content'
   - 'edit own page content'
+  - 'edit own syllabus content'
   - 'edit terms in tags'
+  - 'publish any content'
+  - 'publish any node type article'
+  - 'publish any node type computer_science'
+  - 'publish any node type information_practice'
+  - 'publish any node type page'
+  - 'publish any node type syllabus'
+  - 'publish editable content'
+  - 'publish editable node type article'
+  - 'publish editable node type computer_science'
+  - 'publish editable node type information_practice'
+  - 'publish editable node type page'
+  - 'publish editable node type syllabus'
+  - 'publish own node type article'
+  - 'publish own node type computer_science'
+  - 'publish own node type information_practice'
+  - 'publish own node type page'
+  - 'publish own node type syllabus'
   - 'revert all revisions'
+  - 'revert computer_science revisions'
+  - 'revert information_practice revisions'
+  - 'revert syllabus revisions'
+  - 'unpublish any content'
+  - 'unpublish any node type article'
+  - 'unpublish any node type computer_science'
+  - 'unpublish any node type information_practice'
+  - 'unpublish any node type page'
+  - 'unpublish any node type syllabus'
+  - 'unpublish editable content'
+  - 'unpublish editable node type article'
+  - 'unpublish editable node type computer_science'
+  - 'unpublish editable node type information_practice'
+  - 'unpublish editable node type page'
+  - 'unpublish editable node type syllabus'
+  - 'unpublish own node type article'
+  - 'unpublish own node type computer_science'
+  - 'unpublish own node type information_practice'
+  - 'unpublish own node type page'
+  - 'unpublish own node type syllabus'
   - 'view all revisions'
+  - 'view computer_science revisions'
+  - 'view information_practice revisions'
   - 'view own unpublished content'
+  - 'view syllabus revisions'
   - 'view the administration theme'
