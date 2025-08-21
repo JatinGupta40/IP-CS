@@ -1,4 +1,4 @@
-name: IPCS
+name: IP-CS
 type: drupal10
 docroot: web
 php_version: "8.3"
